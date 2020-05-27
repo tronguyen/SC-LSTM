@@ -1,8 +1,0 @@
-Harley-Davidson Motorcycle brand		["Harley-Davidson. Live to Ride, Ride to Live", "The \n          Road Starts here. It never Ends.", "The \n          Legend Rolls On", "Legend \n          of American roads"]
-Kawasaki brand (motorcycles, ATVs, utility vehicles           and watercrafts)		["Kawasaki. Let the good times roll"]
-TVS Victor Indian motorbike		["TVS Victor. More smiles per hour"]
-Bimota Italian Motorcycle brand		["Bimota. Technology of Emotions"]
-BMW motorcycles		["BMW. Sheer Riding Pleasure"]
-Honda Motorcycles		["Performance First", "You \n          Meet the Nicest People on a Honda", "Motorbike \n          of the century"]
-Yamaha Enticer bike		["Blue blooded Yamaha"]
-American King-V Motorcycles		["King of the V-8 Motorcycles"]
