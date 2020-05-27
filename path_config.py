@@ -1,6 +1,6 @@
 dataname = 'slogan'
 
-root = '/Users/trongnguyen/Documents/Working/Projects/Previous/nlg/'
+root = 'path to project'
 output_dir = root + 'outputs/'
 data_pre = root + 'pre_data/'
 
@@ -18,4 +18,4 @@ check_point = output_dir + 'model/{}/{}/'
 result_path = output_dir + 'result/{}/{}/'
 out_result_dir = output_dir + 'log/{}/{}.txt'
 
-MAX_DOC_LEN = 20
+MAX_DOC_LEN = 20 # maximum doc length
