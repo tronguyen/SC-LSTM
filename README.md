@@ -19,6 +19,6 @@ Due to data shortage, the results might be overfitted, need more data to enhance
 
 ## Init results:
 
-<img src="img/sample.png"  width="500">
+<img src="img/sample.png"  width="600">
 
 - Full keyword to slogan could be found [here](./result/sample.txt)
