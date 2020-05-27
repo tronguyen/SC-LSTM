@@ -4,7 +4,7 @@ certifi==2019.3.9
 cffi==1.11.5
 chardet==3.0.4
 colorama==0.4.1
-#conda==4.6.8
+conda==4.6.8
 cryptography==2.4.2
 cycler==0.10.0
 enum34==1.1.6

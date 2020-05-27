@@ -84,7 +84,7 @@ def get_config(parse=True, **optional_kwargs):
     # Test config
     parser.add_argument('--resume_dir', type=str, default='')
     parser.add_argument('--resume_ep', type=int, default=500)   # test at ep-400
-    parser.add_argument('--gpu', type=str, default='3,2') # gpu-index use; -1 for cpu
+    parser.add_argument('--gpu', type=str, default='-1') # gpu-index use; -1 for cpu
 
     if parse:
         kwargs = parser.parse_args()

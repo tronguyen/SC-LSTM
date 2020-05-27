@@ -39,7 +39,7 @@ class Solver(object):
     def build(self):
         # Build Modules
         # self.device = torch.device('cuda:0,1')
-        self.embedding = nn.Embedding(self.config.vocab_size, self.config.wemb_size, padding_idx=0)
+        self.embedding = nn.Embedding(self.config.vocab_size, self.config.wemb_size, padding_idx=0).cuda()
         
         if True:
             weights_matrix = torch.FloatTensor(pickle.load(open(p.word_vec_pkl,'rb')))
@@ -47,21 +47,21 @@ class Solver(object):
             self.embedding.weight.requires_grad = True
         
         self.w_hr_fw = nn.ModuleList(self.config.num_layers*
-                                  [nn.Linear(self.config.hidden_size, self.config.kwd_size, bias=False)])
+                                  [nn.Linear(self.config.hidden_size, self.config.kwd_size, bias=False)]).cuda()
         self.w_hr_bw = nn.ModuleList(self.config.num_layers*
-                                  [nn.Linear(self.config.hidden_size, self.config.kwd_size, bias=False)])
+                                  [nn.Linear(self.config.hidden_size, self.config.kwd_size, bias=False)]).cuda()
         
-        self.w_wr = nn.Linear(self.config.wemb_size, self.config.kwd_size, bias=False)
+        self.w_wr = nn.Linear(self.config.wemb_size, self.config.kwd_size, bias=False).cuda()
         self.w_ho_fw = nn.Sequential(
                 nn.Linear(self.config.hidden_size*self.config.num_layers, self.config.vocab_size),
     #             nn.LogSoftmax(dim=-1)
-        )
-        self.w_ho_bw = nn.Linear(self.config.hidden_size*self.config.num_layers, self.config.vocab_size)
+        ).cuda()
+        self.w_ho_bw = nn.Linear(self.config.hidden_size*self.config.num_layers, self.config.vocab_size).cuda()
         self.sc_rnn_fw = SCLSTM_MultiCell(self.config.num_layers, self.config.wemb_size, 
-                                       self.config.hidden_size, self.config.kwd_size, dropout=self.config.drop_rate)
+                                       self.config.hidden_size, self.config.kwd_size, dropout=self.config.drop_rate).cuda()
         
         self.sc_rnn_bw = SCLSTM_MultiCell(self.config.num_layers, self.config.wemb_size, 
-                                       self.config.hidden_size, self.config.kwd_size, dropout=self.config.drop_rate)
+                                       self.config.hidden_size, self.config.kwd_size, dropout=self.config.drop_rate).cuda()
         
         self.model = nn.ModuleList([
             self.w_hr_fw, self.w_hr_bw, self.w_wr, self.w_ho_fw, self.w_ho_bw, 
@@ -73,9 +73,9 @@ class Solver(object):
         with torch.no_grad():
             self.hc_list_init = (
                 Variable(torch.zeros(self.config.num_layers, self.config.batch_size, self.config.hidden_size), 
-                     requires_grad=False),
+                     requires_grad=False).cuda(),
                 Variable(torch.zeros(self.config.num_layers, self.config.batch_size, self.config.hidden_size), 
-                     requires_grad=False)
+                     requires_grad=False).cuda()
             )
             
         #--- Init dirs for output ---
@@ -105,6 +105,7 @@ class Solver(object):
         
         self.model.append(self.embedding)
 #         self.model.to(self.device)
+#         self.model = nn.DataParallel(self.model)
         # Build Optimizers
         self.optimizer = optim.Adam(
             list(self.model.parameters()),
@@ -167,8 +168,8 @@ class Solver(object):
             self._zero_grads()
             doc, kwd = doc_features
             with torch.no_grad():
-                var_doc = Variable(doc, requires_grad=False)
-                var_kwd = Variable(kwd, requires_grad=False)
+                var_doc = Variable(doc, requires_grad=False).cuda()
+                var_kwd = Variable(kwd, requires_grad=False).cuda()
             
             doc_emb = self.embedding(var_doc) # get word-emb
             
@@ -282,8 +283,8 @@ class Solver(object):
         
     def gen_one_step(self, x, hc_list, d_t, rnn_model, w_hr, w_ho):
         with torch.no_grad():
-            var_x = Variable(torch.LongTensor(x), requires_grad=False)
-            d_t = Variable(d_t, requires_grad=False)
+            var_x = Variable(torch.LongTensor(x), requires_grad=False).cuda()
+            d_t = Variable(d_t, requires_grad=False).cuda()
             hc_list = self.to_gpu(hc_list)
         
         w_t = self.embedding(var_x)
@@ -309,7 +310,7 @@ class Solver(object):
         return tuple([m.detach().cpu() for m in _list])
     
     def to_gpu(self, _list):
-        return tuple([Variable(m, requires_grad=False) for m in _list])
+        return tuple([Variable(m, requires_grad=False).cuda() for m in _list])
     
     def rerank(self, beams, d_t):
         def add_bw_score(w_list, d_t):

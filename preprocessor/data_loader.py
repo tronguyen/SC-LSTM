@@ -20,8 +20,8 @@ class CorpusData(Dataset):
     def __getitem__(self, index):
         index = index if not self.config.sub_sample else np.random.choice(range(len(self.doc_list)), 1)[0]
         doc_vec, kwd_vec = self.doc_list[index]
-#         print doc_vec
-#         print kwd_vec
+#         print(doc_vec)
+#         print(kwd_vec)
         if self.kw_onehot:
             kwd_vec = kwd_vec*0
             kwd_vec[index] = 1

@@ -103,12 +103,12 @@ class Preprocessor(object):
                 #-- get index ---
                 doc_idx = [1] + [voc2i[w] if w in voc2i else 3 for w in doc] + [2] # add SOS + DOC + EOS
                 kwd_idx = [kwd2i[w] for w in kwd if w in kwd_voc]
-                print kwd_idx
+                print(kwd_idx)
                 #--- create vector ---
                 doc_vec = doc_idx[:p.MAX_DOC_LEN] + [0]*(p.MAX_DOC_LEN - len(doc_idx))
                 kwd_vec = np.zeros(len(kwd_voc))
                 kwd_vec[kwd_idx] = 1
-                print doc_vec, np.sum(kwd_vec)
+                print(doc_vec, np.sum(kwd_vec))
                 trainingdata.append((doc_vec, kwd_vec))
                 
         #--- dump data ---

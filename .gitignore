@@ -1,0 +1,5 @@
+pre_data/*
+**/__pycache__
+data/slogan/www.*
+data/glove.6B.50d.txt
+
