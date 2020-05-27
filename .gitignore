@@ -1,5 +1,6 @@
 pre_data/*
+**/.DS_Store
 **/__pycache__
 data/slogan/www.*
 data/glove.6B.50d.txt
-
+.idea
