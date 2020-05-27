@@ -1,8 +1,9 @@
 # SC-LSTM: Slogan generation
 A Pytorch implementation of "Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems" derived from the original tensorflow-version https://github.com/hit-computer/SC-LSTM.
 The model is trained on Slogan-data to generate fancy slogans given a set of certain keywords.
+Due to data shortage, the results might be overfitted, need more data to enhance the generalization.
 
-![Model Architecture](img/model.png)
+<img src="img/model.png"  width="800">
 
 ## DataSet: Slogan data
 - Pulling from http://www.textart.ru/database/slogan/list-advertising-slogans.html
@@ -17,6 +18,7 @@ The model is trained on Slogan-data to generate fancy slogans given a set of cer
 - python eval.py
 
 ## Init results:
-![Sample results](img/sample.png)
+
+<img src="img/sample.png"  width="500">
 
 - Full keyword to slogan could be found [here](./result/sample.txt)

@@ -1,3 +1,4 @@
+outputs/
 pre_data/*
 **/.DS_Store
 **/__pycache__
