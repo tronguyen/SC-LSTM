@@ -16,7 +16,7 @@ matplotlib==2.2.4
 numpy==1.16.3
 pathlib==1.0.1
 Pillow==8.1.1
-protobuf==3.7.1
+protobuf==3.18.3
 pycosat==0.6.3
 pycparser==2.19
 pyOpenSSL==18.0.0
