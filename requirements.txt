@@ -1,6 +1,6 @@
 asn1crypto==0.24.0
 backports.functools-lru-cache==1.5
-certifi==2019.3.9
+certifi==2022.12.7
 cffi==1.11.5
 chardet==3.0.4
 colorama==0.4.1
